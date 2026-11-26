@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!-- إعلان نوع المستند HTML5 ليخبر المتصفح أن الصفحة تتبع المعايير الحديثة -->
+<html lang="ar" dir="rtl">
+<!-- ضبط لغة الصفحة إلى العربية واتجاه الكتابة من اليمين إلى اليسار -->
+<head>
+  <!-- بداية رأس الصفحة الذي يحوي الإعدادات والروابط ولا يظهر كواجهة مباشرة -->
+  <meta charset="UTF-8" />
+  <!-- ضبط ترميز الأحرف إلى UTF-8 لدعم الحروف العربية بشكل صحيح -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ضبط أبعاد الصفحة لتتناسب مع شاشات الجوال والكمبيوتر -->
+  <title>طلبات «وَصّل» للتوصيل</title>
+  <!-- تحديد عنوان الصفحة الذي يظهر في تبويب المتصفح -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- تهيئة اتصال مسبق بخادم خطوط جوجل لتسريع التحميل -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- تجهيز اتصال آمن لملفات الخطوط من جوجل -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- تحميل خط Cairo بأوزان مختلفة لتحسين مظهر النصوص العربية عند توفر الإنترنت -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- ربط ملف التنسيق الخارجي style.css بالصفحة -->
+</head>
+<body>
+  <!-- بداية جسم الصفحة الذي يحتوي العناصر المرئية والتفاعلية -->
+  <header class="page-header">
+    <!-- ترويسة الصفحة العلوية لعرض اسم النظام وعداد الطلبات -->
+    <div class="container header-inner">
+      <!-- حاوية داخلية لضبط العرض والمحاذاة داخل الترويسة -->
+      <div>
+        <!-- حاوية تضم العنوان الرئيسي والوصف الفرعي -->
+        <h1 class="brand-title">وَصّل — متابعة الطلبات</h1>
+        <!-- العنوان الرئيسي للصفحة -->
+        <p class="brand-subtitle">عرض سريع ومنظم لطلبات التوصيل اليومية</p>
+        <!-- وصف مختصر يوضح وظيفة الصفحة للموظف -->
+      </div>
+      <!-- نهاية حاوية العنوان والوصف -->
+      <div class="orders-count-badge" id="ordersCount">جاري التحميل...</div>
+      <!-- شارة لعرض عدد الطلبات الظاهرة أو حالة التحميل -->
+    </div>
+    <!-- نهاية الحاوية الداخلية للترويسة -->
+  </header>
+  <!-- نهاية ترويسة الصفحة -->
+
+  <main class="container main-content">
+    <!-- المحتوى الرئيسي الذي يضم أدوات التحكم وحالات العرض وقائمة الطلبات -->
+    <section class="controls-bar" aria-label="البحث والفرز">
+      <!-- قسم يجمع خانة البحث باسم الزبون وأداة الفرز -->
+      <div class="search-box">
+        <!-- حاوية حقل البحث -->
+        <label for="searchInput" class="sr-only">ابحث باسم الزبون</label>
+        <!-- تسمية نصية للحقل لدعم إمكانية الوصول -->
+        <input type="search" id="searchInput" class="input-control" placeholder="ابحث باسم الزبون..." autocomplete="off" />
+        <!-- حقل إدخال لبحث الطلبات فوراً حسب اسم الزبون -->
+      </div>
+      <!-- نهاية حاوية حقل البحث -->
+
+      <div class="sort-box">
+        <!-- حاوية قائمة الفرز -->
+        <label for="sortSelect" class="sr-only">ترتيب الطلبات</label>
+        <!-- تسمية نصية لقائمة الفرز لدعم إمكانية الوصول -->
+        <select id="sortSelect" class="input-control">
+          <!-- قائمة منسدلة لاختيار نوع الترتيب -->
+          <option value="date-desc">التاريخ: الأحدث أولاً</option>
+          <!-- خيار ترتيب الطلبات من الأحدث إلى الأقدم -->
+          <option value="date-asc">التاريخ: الأقدم أولاً</option>
+          <!-- خيار ترتيب الطلبات من الأقدم إلى الأحدث -->
+          <option value="amount-desc">المبلغ: الأعلى أولاً</option>
+          <!-- خيار ترتيب الطلبات من أعلى مبلغ إلى أقل مبلغ -->
+          <option value="amount-asc">المبلغ: الأقل أولاً</option>
+          <!-- خيار ترتيب الطلبات من أقل مبلغ إلى أعلى مبلغ -->
+        </select>
+        <!-- نهاية قائمة الفرز -->
+      </div>
+      <!-- نهاية حاوية قائمة الفرز -->
+    </section>
+    <!-- نهاية قسم البحث والفرز -->
+     <section id="statsBar" class="stats-bar" aria-label="إحصائيات الطلبات">
+  <div class="stat-item">
+    <span class="stat-label">المعروضة</span>
+    <strong id="statShownCount" class="stat-value">22</strong>
+  </div>
+  <div class="stat-item">
+    <span class="stat-label">في الطريق</span>
+    <strong id="statInTransitCount" class="stat-value">7</strong>
+  </div>
+  <div class="stat-item">
+    <span class="stat-label">تم التوصيل</span>
+    <strong id="statDeliveredCount" class="stat-value">7</strong>
+  </div>
+  <div class="stat-item">
+    <span class="stat-label">إجمالي المبالغ</span>
+    <strong id="statTotalAmount" class="stat-value">1,010,900</strong>
+  </div>
+</section>
+
+<div id="statusFilters" class="status-filters" role="group" aria-label="فلترة حسب الحالة">
+  <button type="button" class="filter-btn active" data-status="all">الكل</button>
+  <button type="button" class="filter-btn" data-status="new">جديد</button>
+  <button type="button" class="filter-btn" data-status="in_transit">في الطريق</button>
+  <button type="button" class="filter-btn" data-status="delivered">تم التوصيل</button>
+</div>
+
+    <section id="loadingState" class="state-box" aria-live="polite">
+      <!-- قسم حالة التحميل الذي يظهر أثناء جلب البيانات -->
+      <div class="spinner" aria-hidden="true"></div>
+      <!-- عنصر مؤشر التحميل الدائري -->
+      <p>جاري تحميل الطلبات...</p>
+      <!-- رسالة نصية توضح أن الطلبات قيد التحميل -->
+    </section>
+    <!-- نهاية قسم حالة التحميل -->
+
+    <section id="errorState" class="state-box hidden" role="alert">
+      <!-- قسم حالة الخطأ الذي يظهر عند فشل تحميل البيانات -->
+      <p class="error-text" id="errorMessage">تعذّر تحميل الطلبات حالياً.</p>
+      <!-- نص يوضح للموظف حدوث خطأ أثناء التحميل -->
+      <button type="button" id="retryBtn" class="btn-primary">إعادة المحاولة</button>
+      <!-- زر لإعادة محاولة جلب البيانات عند حدوث خطأ -->
+    </section>
+    <!-- نهاية قسم حالة الخطأ -->
+
+    <section id="emptyState" class="state-box hidden" aria-live="polite">
+      <!-- قسم حالة البحث الفارغ الذي يظهر عند عدم وجود نتائج مطابقة -->
+      <p>لا توجد طلبات مطابقة لبحثك.</p>
+      <!-- رسالة تخبر المستخدم أن البحث لم يجد أي طلب -->
+      <button type="button" id="clearSearchBtn" class="btn-secondary">مسح البحث</button>
+      <!-- زر لمسح نص البحث والعودة لعرض جميع الطلبات -->
+    </section>
+    <!-- نهاية قسم حالة البحث الفارغ -->
+
+    <section id="ordersList" class="orders-grid hidden" aria-label="قائمة الطلبات"></section>
+    <!-- حاوية عرض بطاقات الطلبات التي يتم إنشاؤها عبر الجافاسكربت -->
+  </main>
+  <!-- نهاية المحتوى الرئيسي -->
+
+  <!-- ربط ملف الجافاسكربت في نهاية body لضمان تحميل عناصر الصفحة أولاً -->
+
+  <!-- نافذة تفاصيل الطلب عند النقر -->
+  <div id="orderModal" class="modal-backdrop" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalOrderTitle">
+      <div class="modal-header">
+        <h2 id="modalOrderTitle">تفاصيل الطلب</h2>
+        <button type="button" id="closeModalBtn" class="modal-close" aria-label="إغلاق">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+<script src="app.js"></script>
+</body>
+<!-- نهاية جسم الصفحة -->
+</html>
+<!-- نهاية مستند HTML -->

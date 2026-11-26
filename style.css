@@ -1,0 +1,616 @@
+:root {
+  /* محدد الجذر لتعريف المتغيرات العامة وتسهيل توحيد الألوان والأبعاد */
+  --bg-page: #f4f6f9;
+  /* متغير لون خلفية الصفحة لراحة العين */
+  --bg-surface: #ffffff;
+  /* متغير لون سطح البطاقات والشريط العلوي */
+  --text-main: #18202c;
+  /* متغير لون النص الأساسي لتباين واضح */
+  --text-muted: #5c6878;
+  /* متغير لون النص الثانوي للتفاصيل الفرعية */
+  --border-color: #e2e8f0;
+  /* متغير لون الحدود لفصل العناصر بهدوء */
+  --primary: #0f766e;
+  /* متغير اللون الأساسي للتركيز والأزرار الرئيسية */
+  --primary-hover: #115e59;
+  /* متغير لون الزر الأساسي عند التحويم أو اللمس */
+  --danger-text: #b91c1c;
+  /* متغير لون نصوص الخطأ والتنبيه */
+  --status-new-bg: #eff6ff;
+  /* خلفية حالة الطلب الجديد */
+  --status-new-text: #1d4ed8;
+  /* لون نص حالة الطلب الجديد */
+  --status-way-bg: #fffbeb;
+  /* خلفية حالة الطلب في الطريق */
+  --status-way-text: #b45309;
+  /* لون نص حالة الطلب في الطريق */
+  --status-done-bg: #ecfdf5;
+  /* خلفية حالة الطلب تم التوصيل */
+  --status-done-text: #047857;
+  /* لون نص حالة الطلب تم التوصيل */
+  --radius-md: 12px;
+  /* نصف قطر زوايا البطاقات والصناديق */
+  --radius-sm: 8px;
+  /* نصف قطر زوايا الحقول والأزرار */
+  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.05);
+  /* ظل خفيف لإعطاء عمق بسيط للبطاقات */
+}
+
+*, *::before, *::after {
+  /* تطبيق خصائص موحدة على كل العناصر والعناصر الزائفة */
+  box-sizing: border-box;
+  /* جعل الحواف والحشوات جزءاً من عرض العنصر لمنع التمدد الأفقي */
+  margin: 0;
+  /* إزالة الهوامش الافتراضية للتحكم الدقيق بالمسافات */
+  padding: 0;
+  /* إزالة الحشوات الافتراضية لتوحيد العرض بين المتصفحات */
+}
+
+body {
+  /* تنسيق جسم الصفحة العام */
+  font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+  /* استخدام خط Cairo مع خطوط بديلة للنظام عند عدم توفر الإنترنت */
+  background-color: var(--bg-page);
+  /* تعيين لون خلفية الصفحة */
+  color: var(--text-main);
+  /* تعيين لون النص الأساسي */
+  line-height: 1.6;
+  /* زيادة ارتفاع السطر لسهولة قراءة النصوص العربية */
+  min-height: 100vh;
+  /* جعل أقل ارتفاع يساوي ارتفاع الشاشة */
+}
+
+.sr-only {
+  /* فئة لإخفاء التسميات بصرياً مع إبقائها لقارئات الشاشة */
+  position: absolute;
+  /* إخراج العنصر من التدفق العادي للصفحة */
+  width: 1px;
+  /* تصغير العرض إلى 1 بكسل */
+  height: 1px;
+  /* تصغير الارتفاع إلى 1 بكسل */
+  overflow: hidden;
+  /* إخفاء أي محتوى زائد */
+  clip: rect(0, 0, 0, 0);
+  /* قص العنصر بصرياً حتى لا يظهر للمستخدم */
+  white-space: nowrap;
+  /* منع التفاف النص داخل الصندوق الصغير */
+}
+
+.hidden {
+  /* فئة لإخفاء العناصر عند عدم الحاجة لعرضها */
+  display: none !important;
+  /* إخفاء العنصر بالكامل وتجاوز أي تنسيق عرض آخر */
+}
+
+.container {
+  /* حاوية عامة لتوسيط المحتوى وتحديد أقصى عرض له */
+  width: 100%;
+  /* إشغال العرض المتاح على الشاشات الصغيرة */
+  max-width: 1100px;
+  /* تحديد أقصى عرض على الشاشات الكبيرة */
+  margin: 0 auto;
+  /* توسيط الحاوية أفقياً في منتصف الصفحة */
+  padding: 0 16px;
+  /* إضافة حشوة جانبية لحماية المحتوى من حواف الشاشة */
+}
+
+.page-header {
+  /* تنسيق الشريط العلوي للصفحة */
+  background-color: var(--bg-surface);
+  /* جعل خلفية الترويسة بيضاء */
+  border-bottom: 1px solid var(--border-color);
+  /* إضافة خط فاصل سفلي للترويسة */
+  padding: 16px 0;
+  /* إضافة حشوة رأسية للترويسة */
+  position: sticky;
+  /* تثبيت الترويسة أثناء التمرير */
+  top: 0;
+  /* تثبيتها عند أعلى نافذة العرض */
+  z-index: 10;
+  /* رفع طبقة الترويسة فوق البطاقات عند التمرير */
+}
+
+.header-inner {
+  /* تنسيق العناصر الداخلية داخل الترويسة */
+  display: flex;
+  /* استخدام Flexbox لترتيب العنوان والعداد */
+  align-items: center;
+  /* محاذاة العناصر رأسياً في الوسط */
+  justify-content: space-between;
+  /* توزيع العناصر بين اليمين واليسار */
+  gap: 12px;
+  /* إضافة مسافة بين العناصر */
+  flex-wrap: wrap;
+  /* السماح بالالتفاف في الشاشات الضيقة */
+}
+
+.brand-title {
+  /* تنسيق العنوان الرئيسي للنظام */
+  font-size: 1.25rem;
+  /* تحديد حجم خط مناسب للعنوان */
+  font-weight: 700;
+  /* جعل خط العنوان عريضاً */
+  color: var(--text-main);
+  /* تعيين لون العنوان */
+}
+
+.brand-subtitle {
+  /* تنسيق الوصف الفرعي تحت العنوان */
+  font-size: 0.875rem;
+  /* تصغير حجم خط الوصف عن العنوان */
+  color: var(--text-muted);
+  /* إعطاء الوصف لوناً ثانوياً هادئاً */
+}
+
+.orders-count-badge {
+  /* تنسيق شارة عداد الطلبات */
+  background-color: var(--bg-page);
+  /* إعطاء الشارة خلفية مختلفة قليلاً عن الأبيض */
+  border: 1px solid var(--border-color);
+  /* إضافة إطار رفيع حول الشارة */
+  padding: 6px 12px;
+  /* إضافة حشوة داخلية للشارة */
+  border-radius: 999px;
+  /* جعل حواف الشارة دائرية بالكامل */
+  font-size: 0.85rem;
+  /* تحديد حجم خط مناسب للعداد */
+  font-weight: 600;
+  /* جعل رقم العداد واضحاً ومتوسط السماكة */
+  color: var(--text-main);
+  /* تعيين لون نص العداد */
+}
+
+.main-content {
+  /* تنسيق مساحة المحتوى الرئيسية */
+  padding-top: 20px;
+  /* إضافة مسافة علوية أسفل الترويسة */
+  padding-bottom: 40px;
+  /* إضافة مسافة سفلية في نهاية الصفحة */
+}
+
+.controls-bar {
+  /* تنسيق شريط البحث والفرز */
+  display: grid;
+  /* استخدام Grid لترتيب أدوات التحكم */
+  grid-template-columns: 1fr;
+  /* جعلها عموداً واحداً افتراضياً للجوال */
+  gap: 12px;
+  /* إضافة مسافة بين حقل البحث وقائمة الفرز */
+  margin-bottom: 20px;
+  /* إضافة مسافة سفلية قبل قائمة الطلبات */
+}
+
+.input-control {
+  /* تنسيق مشترك لحقل البحث وقائمة الفرز */
+  width: 100%;
+  /* جعل الحقل يأخذ كامل عرض حاويته */
+  padding: 12px 14px;
+  /* إعطاء مساحة مريحة للكتابة والنقر */
+  font-family: inherit;
+  /* وراثة خط الصفحة للحفاظ على التناسق */
+  font-size: 0.95rem;
+  /* تحديد حجم خط واضح للمدخلات */
+  color: var(--text-main);
+  /* تعيين لون النص داخل الحقل */
+  background-color: var(--bg-surface);
+  /* جعل خلفية الحقل بيضاء */
+  border: 1px solid var(--border-color);
+  /* إضافة إطار واضح للحقل */
+  border-radius: var(--radius-sm);
+  /* تدوير زوايا الحقل بشكل خفيف */
+  outline: none;
+  /* إزالة الإطار الافتراضي واستبداله بتنسيق تركيز أوضح */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  /* جعل تغير الحدود والظل ناعماً عند التركيز */
+}
+
+.input-control:focus {
+  /* تنسيق الحقل عند النقر والتركيز عليه */
+  border-color: var(--primary);
+  /* تلوين إطار الحقل باللون الأساسي */
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+  /* إضافة هالة خفيفة حول الحقل لإبراز التركيز */
+}
+
+.state-box {
+  /* تنسيق صناديق الحالات (التحميل والخطأ والبحث الفارغ) */
+  background-color: var(--bg-surface);
+  /* جعل خلفية الصندوق بيضاء */
+  border: 1px solid var(--border-color);
+  /* إضافة إطار رفيع للصندوق */
+  border-radius: var(--radius-md);
+  /* تدوير زوايا الصندوق */
+  padding: 36px 20px;
+  /* إضافة حشوة واسعة لراحة القراءة */
+  text-align: center;
+  /* توسيط النصوص والأزرار داخل الصندوق */
+  box-shadow: var(--shadow-card);
+  /* إضافة ظل خفيف للصندوق */
+}
+
+.state-box p {
+  /* تنسيق النص داخل صندوق الحالة */
+  color: var(--text-muted);
+  /* إعطاء النص لوناً ثانوياً واضحاً */
+  margin-top: 10px;
+  /* إضافة مسافة علوية فوق النص */
+  font-size: 1rem;
+  /* تحديد حجم خط مناسب للرسالة */
+}
+
+.error-text {
+  /* تنسيق نص رسالة الخطأ */
+  color: var(--danger-text) !important;
+  /* تلوين رسالة الخطأ بالأحمر الداكن لتنبيه المستخدم */
+  font-weight: 600;
+  /* زيادة سماكة الخط لإبراز رسالة الخطأ */
+}
+
+.spinner {
+  /* تنسيق مؤشر التحميل الدائري */
+  width: 34px;
+  /* تحديد عرض الدائرة */
+  height: 34px;
+  /* تحديد ارتفاع الدائرة ليكون مساوياً للعرض */
+  margin: 0 auto;
+  /* توسيط المؤشر أفقياً داخل الصندوق */
+  border: 3px solid var(--border-color);
+  /* إنشاء حلقة كاملة بلون باهت */
+  border-top-color: var(--primary);
+  /* تلوين الجزء العلوي باللون الأساسي لإظهار الحركة */
+  border-radius: 50%;
+  /* تحويل الشكل المربع إلى دائرة كاملة */
+  animation: spin 0.8s linear infinite;
+  /* تشغيل حركة الدوران المستمرة */
+}
+
+@keyframes spin {
+  /* تعريف حركة الدوران للتحميل */
+  to {
+    /* الوصول إلى نهاية الدورة الكاملة */
+    transform: rotate(360deg);
+    /* تدوير العنصر 360 درجة */
+  }
+}
+
+.btn-primary, .btn-secondary {
+  /* تنسيق مشترك للأزرار */
+  margin-top: 14px;
+  /* إضافة مسافة علوية لفصل الزر عن النص */
+  padding: 10px 18px;
+  /* إضافة حشوة مريحة للنقر */
+  font-family: inherit;
+  /* وراثة خط الصفحة */
+  font-size: 0.9rem;
+  /* تحديد حجم خط مناسب لنص الزر */
+  font-weight: 600;
+  /* جعل نص الزر متوسط السماكة */
+  border-radius: var(--radius-sm);
+  /* تدوير زوايا الزر بشكل خفيف */
+  cursor: pointer;
+  /* إظهار مؤشر اليد عند الإشارة للزر */
+  border: none;
+  /* إزالة الحد الافتراضي للزر */
+  transition: background-color 0.2s ease;
+  /* جعل تغير اللون عند التفاعل ناعماً */
+}
+
+.btn-primary {
+  /* تنسيق الزر الأساسي مثل زر إعادة المحاولة */
+  background-color: var(--primary);
+  /* تعيين لون الخلفية الأساسي */
+  color: #ffffff;
+  /* تعيين لون النص الأبيض لتباين عالٍ */
+}
+
+.btn-primary:hover {
+  /* تنسيق الزر الأساسي عند التحويم */
+  background-color: var(--primary-hover);
+  /* تغميق اللون قليلاً لتأكيد التفاعل */
+}
+
+.btn-secondary {
+  /* تنسيق الزر الثانوي مثل زر مسح البحث */
+  background-color: var(--bg-page);
+  /* إعطاء الزر خلفية هادئة */
+  color: var(--text-main);
+  /* تعيين لون النص الأساسي */
+  border: 1px solid var(--border-color);
+  /* إضافة إطار رفيع حول الزر */
+}
+
+.btn-secondary:hover {
+  /* تنسيق الزر الثانوي عند التحويم */
+  background-color: #e2e8f0;
+  /* تغميق الخلفية قليلاً عند التفاعل */
+}
+
+.orders-grid {
+  /* تنسيق شبكة عرض الطلبات */
+  display: grid;
+  /* استخدام CSS Grid لترتيب البطاقات */
+  grid-template-columns: 1fr;
+  /* عمود واحد على الجوال لسهولة القراءة */
+  gap: 14px;
+  /* إضافة مسافة بين البطاقات */
+}
+
+.order-card {
+  /* تنسيق بطاقة الطلب الواحد */
+  background-color: var(--bg-surface);
+  /* جعل خلفية البطاقة بيضاء */
+  border: 1px solid var(--border-color);
+  /* إضافة إطار رفيع للبطاقة */
+  border-radius: var(--radius-md);
+  /* تدوير زوايا البطاقة */
+  padding: 16px;
+  /* إضافة حشوة داخلية لمحتوى البطاقة */
+  box-shadow: var(--shadow-card);
+  /* إضافة ظل خفيف للبطاقة */
+  display: flex;
+  /* استخدام Flexbox لترتيب أجزاء البطاقة */
+  flex-direction: column;
+  /* ترتيب العناصر عمودياً داخل البطاقة */
+  gap: 10px;
+  /* إضافة مسافة بين عناصر البطاقة */
+}
+
+.order-top {
+  /* تنسيق الصف العلوي في البطاقة الذي يحوي رقم الطلب والحالة */
+  display: flex;
+  /* استخدام Flexbox لمحاذاة الرقم والحالة أفقياً */
+  align-items: center;
+  /* محاذاة الرقم والحالة رأسياً في الوسط */
+  justify-content: space-between;
+  /* وضع رقم الطلب في طرف والحالة في الطرف الآخر */
+  gap: 8px;
+  /* إضافة مسافة فاصلة بينهما */
+}
+
+.order-id {
+  /* تنسيق نص رقم الطلب */
+  font-size: 0.85rem;
+  /* تحديد حجم خط مناسب لرقم الطلب */
+  font-weight: 700;
+  /* جعل رقم الطلب عريضاً لسهولة تمييزه */
+  color: var(--text-muted);
+  /* إعطاء رقم الطلب لوناً ثانوياً */
+}
+
+.status-badge {
+  /* تنسيق شارة حالة الطلب */
+  padding: 4px 10px;
+  /* إضافة حشوة صغيرة حول نص الحالة */
+  border-radius: 999px;
+  /* جعل حواف الشارة دائرية */
+  font-size: 0.8rem;
+  /* تحديد حجم خط مناسب للشارة */
+  font-weight: 700;
+  /* جعل نص الحالة عريضاً لقراءته بسرعة */
+}
+
+.status-new {
+  /* تنسيق شارة حالة جديد */
+  background-color: var(--status-new-bg);
+  /* تعيين خلفية حالة جديد */
+  color: var(--status-new-text);
+  /* تعيين لون نص حالة جديد */
+}
+
+.status-way {
+  /* تنسيق شارة حالة في الطريق */
+  background-color: var(--status-way-bg);
+  /* تعيين خلفية حالة في الطريق */
+  color: var(--status-way-text);
+  /* تعيين لون نص حالة في الطريق */
+}
+
+.status-done {
+  /* تنسيق شارة حالة تم التوصيل */
+  background-color: var(--status-done-bg);
+  /* تعيين خلفية حالة تم التوصيل */
+  color: var(--status-done-text);
+  /* تعيين لون نص حالة تم التوصيل */
+}
+
+.customer-name {
+  /* تنسيق اسم الزبون في البطاقة */
+  font-size: 1.05rem;
+  /* إبراز اسم الزبون بحجم خط أوضح */
+  font-weight: 700;
+  /* جعل اسم الزبون بخط عريض */
+  color: var(--text-main);
+  /* تعيين لون النص الأساسي للاسم */
+}
+
+.order-meta {
+  /* تنسيق صف المبلغ والتاريخ أسفل البطاقة */
+  display: flex;
+  /* استخدام Flexbox لوضع المبلغ والتاريخ في سطر واحد */
+  align-items: center;
+  /* محاذاة المبلغ والتاريخ رأسياً في الوسط */
+  justify-content: space-between;
+  /* توزيع المبلغ والتاريخ على طرفي السطر */
+  gap: 10px;
+  /* إضافة مسافة فاصلة بين المبلغ والتاريخ */
+  padding-top: 10px;
+  /* إضافة مسافة علوية بعد خط الفصل */
+  border-top: 1px solid var(--border-color);
+  /* إضافة خط فاصل علوي فوق المبلغ والتاريخ */
+  font-size: 0.9rem;
+  /* تحديد حجم خط مناسب للتفاصيل */
+}
+
+.order-amount {
+  /* تنسيق نص المبلغ */
+  font-weight: 700;
+  /* جعل المبلغ عريضاً لوضوح قراءته */
+  color: var(--text-main);
+  /* تعيين لون النص الأساسي للمبلغ */
+}
+
+.order-date {
+  /* تنسيق نص التاريخ */
+  color: var(--text-muted);
+  /* إعطاء التاريخ لوناً ثانوياً هادئاً */
+  font-size: 0.82rem;
+  /* تصغير خط التاريخ قليلاً لإبراز المبلغ والاسم */
+}
+
+@media (min-width: 640px) {
+  /* تنسيق إضافي للشاشات بعرض 640 بكسل فأعلى */
+  .controls-bar {
+    /* تعديل شبكة شريط التحكم للشاشات المتوسطة */
+    grid-template-columns: 2fr 1fr;
+    /* جعل حقل البحث أوسع من قائمة الفرز */
+  }
+
+  .orders-grid {
+    /* تعديل شبكة الطلبات للشاشات المتوسطة */
+    grid-template-columns: repeat(2, 1fr);
+    /* عرض البطاقات في عمودين متساويين */
+  }
+}
+
+@media (min-width: 960px) {
+  /* تنسيق إضافي لشاشات الكمبيوتر بعرض 960 بكسل فأعلى */
+  .orders-grid {
+    /* تعديل شبكة الطلبات لشاشات الكمبيوتر */
+    grid-template-columns: repeat(3, 1fr);
+    /* عرض البطاقات في ثلاثة أعمدة متساوية */
+  }
+}
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stat-item {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.stat-value {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.status-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.filter-btn {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #1e293b;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
+}
+
+@media (min-width: 768px) {
+  .stats-bar {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.order-card {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+.modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 440px;
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.modal-close {
+  border: none;
+  background: #f1f5f9;
+  color: #0f172a;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.modal-row:last-child {
+  border-bottom: none;
+}
+
+.modal-label {
+  color: #64748b;
+  font-weight: 600;
+}
+
+.modal-value {
+  color: #0f172a;
+  font-weight: 700;
+  text-align: left;
+}
